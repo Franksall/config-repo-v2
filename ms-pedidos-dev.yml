@@ -8,7 +8,7 @@ spring:
     password: 3264 # Tu contraseña
     pool:
       enabled: true
-  # R2DBC no tiene ddl-auto, pero podemos inicializar la BD con un script
+  # R2DBC no tiene ddl-auto, pero se puede inicializar la BD con un script
   sql:
     init:
       mode: always 
@@ -19,5 +19,18 @@ ms-productos:
 eureka:
   client:
     serviceUrl:
-      # Esta es la dirección de tu "agenda" (el registry-service en el puerto 8099)
+      
       defaultZone: http://localhost:8099/eureka/
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      
+      
+      productos-cb: 
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED   #  N° de llamadas
+        slidingWindowSize: 10            # Revisa las últimas 10 llamadas
+        failureRateThreshold: 50         # Si 5 de esas 10 fallan (50%), se "abre"
+        waitDurationInOpenState: 10s     # "abierto" por 10 segundos
+        permittedNumberOfCallsInHalfOpenState: 3 # En 10s, deja pasar 3 llamadas de prueba
