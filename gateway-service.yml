@@ -14,18 +14,18 @@ spring:
         locator:
           enabled: true
       routes:
+        - id: ms-pedidos-route
+          uri: lb://ms-pedidos
+          predicates:
+            - Path=/api/pedidos/**
+          filters: 
+            - PreserveHostHeader 
         - id: ms-productos-route
           uri: lb://product-ms-v2
           predicates:
             - Path=/api/productos/**
           filters: 
-            - PreserveHostHeader 
-        - id: ms-productos-route
-          uri: lb://ms-productos
-          predicates:
-            - Path=/api/productos/**
-          filters: 
-            - PreserveHostHeader 
+            - PreserveHostHeader
 
         - id: ms-authorization-server-oauth
           uri: lb://MS-AUTHORIZATION-SERVER
