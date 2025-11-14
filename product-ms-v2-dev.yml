@@ -15,7 +15,7 @@ spring:
       resourceserver:
         jwt:
           # Valida el token contra el Gateway (o el Auth Server directamente)
-          issuer-uri: http://gateway-service:8080 
+          issuer-uri: http://ms-authorization-server:9000
 
 logging:
   level:
