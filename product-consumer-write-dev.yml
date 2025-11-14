@@ -3,7 +3,8 @@ server:
 spring:
   # --- Configuración Reactiva (R2DBC) ---
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/db_productos_dev
+    url: r2dbc:postgresql://postgres-db:5432/sistema_pedidos_db
+    #url: r2dbc:postgresql://localhost:5432/db_productos_dev
     username: postgres
     password: 3264 # Tu contraseña
     pool:
@@ -17,5 +18,5 @@ logging:
 eureka:
   client:
     serviceUrl:
-      
-      defaultZone: http://localhost:8099/eureka/
+      defaultZone: http://registry-service:8099/eureka/
+      #defaultZone: http://localhost:8099/eureka/
