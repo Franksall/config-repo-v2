@@ -12,6 +12,17 @@ spring:
     hibernate:
       ddl-auto: none # No hiberna intente crear/borrar tablas
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    
+    bootstrap-servers: kafka-broker:9092
+    
+    
+    consumer:
+      # convertir el JSON de vuelta a un objeto Producto
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      
+      properties:
+        spring.json.trust.packages: "*"
 
 logging:
   level:

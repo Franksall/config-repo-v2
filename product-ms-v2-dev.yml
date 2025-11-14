@@ -16,6 +16,14 @@ spring:
         jwt:
           # Valida el token contra el Gateway (o el Auth Server directamente)
           issuer-uri: http://ms-authorization-server:9000
+  kafka:
+    
+    bootstrap-servers: kafka-broker:9092
+    
+    
+    producer:
+      # convertir el "valor" (nuestro objeto Producto) a JSON
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 logging:
   level:
