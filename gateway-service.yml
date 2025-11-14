@@ -1,5 +1,3 @@
-
-
 server:
   port: 8080 
 
@@ -14,18 +12,44 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true 
-      
-     
+          enabled: true
       routes:
-        # Ruta para "ms-pedidos"
-        - id: ms-pedidos-route
-          uri: lb://ms-pedidos  # "lb:" significa "busca en Eureka"
+        - id: ms-productos-route
+          uri: lb://product-ms-v2
           predicates:
-            - Path=/api/pedidos/** # URL empieza con /api/pedidos/...
-        
-        # Ruta para "ms-productos"
+            - Path=/api/productos/**
+          filters: 
+            - PreserveHostHeader 
         - id: ms-productos-route
           uri: lb://ms-productos
           predicates:
-            - Path=/api/productos/** # Si la URL empieza con /api/productos/...
+            - Path=/api/productos/**
+          filters: 
+            - PreserveHostHeader 
+
+        - id: ms-authorization-server-oauth
+          uri: lb://MS-AUTHORIZATION-SERVER
+          predicates:
+            - Path=/oauth2/**
+          filters: 
+            - PreserveHostHeader 
+
+        - id: ms-authorization-server-well-known
+          uri: lb://MS-AUTHORIZATION-SERVER
+          predicates:
+            - Path=/.well-known/**
+          filters: 
+            - PreserveHostHeader 
+
+        - id: ms-authorization-server-login
+          uri: lb://MS-AUTHORIZATION-SERVER
+          predicates:
+            - Path=/login
+          filters: 
+            - PreserveHostHeader 
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://ms-authorization-server:9000
