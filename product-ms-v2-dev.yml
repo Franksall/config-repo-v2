@@ -4,14 +4,19 @@ spring:
   # --- Configuración Reactiva (R2DBC) ---
   r2dbc:
     url: r2dbc:postgresql://postgres-db:5432/sistema_pedidos_db
-    #url: r2dbc:postgresql://localhost:5432/db_productos_dev
     username: postgres
-    password: 3264 # Tu contraseña
+    password: postgres 
     pool:
       enabled: true
-  # --- JPA ya no se usa ---
-  jpa:
-    show-sql: true #  se configura diferente en R2DBC, pero lo dejamos
+  
+  
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # Valida el token contra el Gateway (o el Auth Server directamente)
+          issuer-uri: http://gateway-service:8080 
+
 logging:
   level:
     root: INFO
@@ -19,4 +24,3 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://registry-service:8099/eureka/
-      #defaultZone: http://localhost:8099/eureka/
