@@ -22,7 +22,7 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       
       properties:
-        spring.json.trust.packages: "*"
+        spring.json.trusted.packages: "*"
 
 logging:
   level:
