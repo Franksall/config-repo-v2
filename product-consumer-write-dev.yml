@@ -10,7 +10,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: none # No hiberna intente crear/borrar tablas
+      ddl-auto: none 
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   kafka:
     
@@ -18,7 +18,7 @@ spring:
     
     
     consumer:
-      # convertir el JSON de vuelta a un objeto Producto
+      
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       
       properties:
